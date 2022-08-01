@@ -1,0 +1,35 @@
+plugins {
+    id 'io.spring.dependency-management' version '1.0.12.RELEASE'
+}
+
+subprojects {
+
+    group = 'ru.it1.tracing'
+    version = '1.0-SNAPSHOT'
+
+    apply plugin: 'java'
+    apply plugin: 'io.spring.dependency-management'
+    apply plugin: 'java-library'
+
+    repositories {
+        mavenCentral()
+    }
+
+    dependencyManagement {
+        imports {
+            mavenBom("org.springframework.boot:spring-boot-dependencies:2.7.2")
+        }
+    }
+
+    dependencies {
+
+        compileOnly 'org.projectlombok:lombok'
+        annotationProcessor 'org.projectlombok:lombok'
+    }
+
+    compileJava {
+        sourceCompatibility = 17
+        targetCompatibility = 17
+    }
+
+}
