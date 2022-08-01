@@ -4,6 +4,11 @@ server:
 spring:
   application:
     name: service-b
+  zipkin:
+    sender:
+      type: kafka
+  kafka:
+    bootstrap-servers: localhost:19092
 
 logging:
   level:
