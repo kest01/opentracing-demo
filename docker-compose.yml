@@ -1,0 +1,21 @@
+version: '3'
+services:
+
+  kafka-zookeeper:
+    image: openzipkin/zipkin-kafka
+    container_name: kafka-zookeeper
+    ports:
+      - 12181:2181
+      #      - 9092:9092
+      # port 19092 is listening on localhost by default. In normal Docker,
+      # you can set your bootstrap server list to localhost:19092
+      - 19092:19092
+
+  zipkin:
+    image: openzipkin/zipkin
+    environment:
+      KAFKA_BOOTSTRAP_SERVERS: 'kafka-zookeeper:9092'
+    ports:
+      - 9411:9411
+    depends_on:
+      - kafka-zookeeper
