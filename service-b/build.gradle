@@ -5,6 +5,7 @@ dependencies {
     implementation 'org.springframework.cloud:spring-cloud-sleuth-zipkin'
     implementation 'org.springframework.kafka:spring-kafka'
 
+    implementation project(":tracing-common")
 }
 
 

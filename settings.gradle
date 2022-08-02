@@ -2,4 +2,5 @@ rootProject.name = 'opentracing-demo'
 
 include 'service-a'
 include 'service-b'
+include 'tracing-common'
 
