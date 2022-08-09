@@ -17,17 +17,17 @@ public class SpanService {
 
     private final Tracer tracer;
 
+    public void addTagToSpan(String tag, String message) {
+        Span span = tracer.currentSpan();
+        span.tag(tag, message);
+    }
+
     public String getCurrentTraceId() {
         Span span = tracer.currentSpan();
         if (span != null) {
             return span.context().traceIdString();
         }
         return null;
-    }
-
-    public void addTagToSpan(String tag, String message) {
-        Span span = tracer.currentSpan();
-        span.tag(tag, message);
     }
 
     public <T> T runInNewSpan(String spanName, Supplier<T> func, Map<String, String> tags) {

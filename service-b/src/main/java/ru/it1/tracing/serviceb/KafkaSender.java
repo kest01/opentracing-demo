@@ -3,6 +3,7 @@ package ru.it1.tracing.serviceb;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.cloud.sleuth.annotation.NewSpan;
+import org.springframework.cloud.sleuth.annotation.SpanTag;
 import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.stereotype.Component;
 
@@ -14,7 +15,7 @@ public class KafkaSender {
     private final KafkaTemplate<String, String> kafkaTemplate;
 
     @NewSpan("Nested span")
-    public void send(boolean raiseError) {
+    public void send(@SpanTag("raiseError param") boolean raiseError) {
         log.info("Sending message to kafka");
         kafkaTemplate.send("test-topic", "message key", String.valueOf(raiseError))
                 .addCallback(

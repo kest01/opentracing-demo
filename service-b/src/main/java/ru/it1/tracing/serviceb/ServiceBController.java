@@ -20,6 +20,7 @@ public class ServiceBController {
 
     @GetMapping("/hello")
     public String hello(boolean raiseError) {
+        spanService.addTagToSpan("raiseError", String.valueOf(raiseError));
         log.info("ServiceB controller call. TraceId = {}; raiseError={}", spanService.getCurrentTraceId(), raiseError);
 
         kafkaSender.send(raiseError);
